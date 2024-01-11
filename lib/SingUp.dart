@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class SingUp extends StatelessWidget {
+  const SingUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class Login extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "LOGIN",
+              "SingUp",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text("Email"),
@@ -33,31 +33,12 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                   suffixIcon: Icon(Icons.key), border: OutlineInputBorder()),
             ),
-            Row(
-              children: [
-                Checkbox(
-                  value: true,
-                  onChanged: (value) {},
-                ),
-                Text("Remember me"),
-              ],
-            ),
             Center(
                 child: SizedBox(
                     width: 200,
                     height: 35,
                     child: ElevatedButton(
                         onPressed: () {}, child: Text("Login")))),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text("Forgot password",
-                      style: TextStyle(color: Colors.grey[400])),
-                ),
-              ],
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
