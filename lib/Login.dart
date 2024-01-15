@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/SingUp.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -8,11 +9,17 @@ class Login extends StatelessWidget {
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
     return Scaffold(
+      // backgroundColor: const Color.fromARGB(255, 235, 235, 235),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Center(
+                child: SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Image.asset("assets/images/todo11.jpg"))),
             Text(
               "LOGIN",
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -36,6 +43,8 @@ class Login extends StatelessWidget {
             Row(
               children: [
                 Checkbox(
+                  fillColor: MaterialStatePropertyAll(
+                      Color.fromARGB(255, 87, 173, 220)),
                   value: true,
                   onChanged: (value) {},
                 ),
@@ -47,7 +56,12 @@ class Login extends StatelessWidget {
                     width: 200,
                     height: 35,
                     child: ElevatedButton(
-                        onPressed: () {}, child: Text("Login")))),
+                        onPressed: () {},
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 87, 173, 220)),
+                        )))),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -86,18 +100,34 @@ class Login extends StatelessWidget {
               children: [
                 IconButton(
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll(Colors.white)),
+                        backgroundColor: MaterialStatePropertyAll(Colors.red)),
                     onPressed: () {},
-                    icon:
-                        Icon(Icons.g_mobiledata_rounded, color: (Colors.red))),
+                    icon: Icon(Icons.g_mobiledata_rounded,
+                        color: (Colors.white))),
                 IconButton(
                     /*style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue)),*/
                     onPressed: () {},
-                    icon: Icon(Icons.facebook_sharp, color: (Colors.blue))),
+                    icon: Icon(Icons.facebook_sharp,
+                        size: 45, color: (Colors.blue))),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Need an account?'),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SingUp()));
+                    },
+                    child: Text(
+                      'SinUp',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 87, 173, 220)),
+                    )),
+              ],
+            )
           ],
         ),
       ),

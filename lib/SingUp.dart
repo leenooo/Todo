@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/Login.dart';
 
 class SingUp extends StatelessWidget {
   const SingUp({super.key});
@@ -8,8 +9,9 @@ class SingUp extends StatelessWidget {
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
     return Scaffold(
+      //  backgroundColor: const Color.fromARGB(255, 235, 235, 235),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,7 +40,14 @@ class SingUp extends StatelessWidget {
                     width: 200,
                     height: 35,
                     child: ElevatedButton(
-                        onPressed: () {}, child: Text("Login")))),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                Color.fromARGB(255, 87, 173, 220))),
+                        onPressed: () {},
+                        child: Text(
+                          "Login",
+                          style: TextStyle(color: Colors.white),
+                        )))),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -67,18 +76,34 @@ class SingUp extends StatelessWidget {
               children: [
                 IconButton(
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll(Colors.white)),
+                        backgroundColor: MaterialStatePropertyAll(Colors.red)),
                     onPressed: () {},
-                    icon:
-                        Icon(Icons.g_mobiledata_rounded, color: (Colors.red))),
+                    icon: Icon(Icons.g_mobiledata_rounded,
+                        color: (Colors.white))),
                 IconButton(
                     /*style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue)),*/
                     onPressed: () {},
-                    icon: Icon(Icons.facebook_sharp, color: (Colors.blue))),
+                    icon: Icon(Icons.facebook_sharp,
+                        size: 45, color: (Colors.blue))),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Already a user ?'),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Login()));
+                    },
+                    child: Text(
+                      'Login',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 87, 173, 220)),
+                    )),
+              ],
+            )
           ],
         ),
       ),

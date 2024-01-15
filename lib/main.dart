@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/SingUp.dart';
+import 'package:todo/HomePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: SingUp(),
+      home: HomePage(),
     );
   }
 }
