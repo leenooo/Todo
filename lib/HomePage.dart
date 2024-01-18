@@ -116,9 +116,9 @@ class _HomePageState extends State<HomePage> {
                   return AlertDialog(
                       backgroundColor: Color.fromARGB(255, 139, 182, 202),
                       title: Text(
-                        "Write your plans",
+                        "Write your plans?",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                            fontWeight: FontWeight.bold, color: Colors.white,fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                       content: TextField(
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Text(
                               "Add",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white,fontSize: 15),
                             ),
                           ),
                         ),
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Text(
                               "cancel",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white,fontSize: 15),
                             ),
                           ),
                         ),
@@ -160,33 +160,38 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        "My Tasks ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-                ListTile(
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.restore_from_trash,
-                      color: Colors.red,
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      "My Tasks ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  leading: Checkbox(value: false, onChanged: (value) {}),
-                )
-              ],
-            ),
+                ],
+              ),
+              
+              Expanded(
+                child: ListView.builder(itemCount: 5, itemBuilder: (context, index) {
+                  return  ListTile(
+                    trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.restore_from_trash,
+                        color: Colors.red,
+                      ),
+                    ),
+                    leading: Checkbox(value: false, onChanged: (value) {}),
+                  );
+                },
+                 
+                ),
+              )
+            ],
           ),
         ));
   }
