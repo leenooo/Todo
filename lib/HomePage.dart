@@ -10,51 +10,152 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController additem = TextEditingController();
     return Scaffold(
         appBar: AppBar(
           actions: [
             IconButton(
+                tooltip: 'Logout ',
                 onPressed: () {
                   showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
+                          backgroundColor: Color.fromARGB(255, 139, 182, 202),
                           title: Text(
-                            "هل انت متأكد؟",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            "Are you sure?",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
                           actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                              child: Text(
-                                "نعم",
+                            Padding(
+                              padding: const EdgeInsets.only(right: 50),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                                child: Text(
+                                  "Yes",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context, false);
-                              },
-                              child: Text(
-                                "لا",
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, false);
+                                },
+                                child: Text(
+                                  "No",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
                               ),
                             ),
                           ],
                         );
                       });
                 },
-                icon: Icon(Icons.logout))
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ))
           ],
-          backgroundColor: Colors.grey,
-          title: Text("All ToDos"),
+          backgroundColor: Color.fromARGB(255, 139, 182, 202),
+          title: Text(
+            "All ToDos",
+            style: TextStyle(color: Colors.white),
+          ),
           centerTitle: true,
         ),
-        drawer: Drawer(),
+        drawer: Drawer(
+          backgroundColor: Color.fromARGB(255, 139, 182, 202),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 40,
+                  child: Icon(Icons.person),
+                ),
+                ListTile(
+                  onTap: () {
+                    //  Navigator.pushReplacement(
+                    //  context,
+                    // MaterialPageRoute(builder: (context) => const ContactPage()),
+                  },
+                  title: const Text(
+                    'Settings',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  trailing: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'اضافة عنصر',
+          backgroundColor: Color.fromARGB(255, 139, 182, 202),
+          hoverColor: Colors.white,
+          splashColor: const Color.fromARGB(255, 224, 160, 181),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                      backgroundColor: Color.fromARGB(255, 139, 182, 202),
+                      title: Text(
+                        "Write your plans",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                      content: TextField(
+                        controller: additem,
+                        maxLength: 50,
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      actions: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 50),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                            child: Text(
+                              "Add",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pop(context, false);
+                            },
+                            child: Text(
+                              "cancel",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ]);
+                });
+          },
+          tooltip: 'Add item ',
           child: Icon(Icons.add),
         ),
         body: Padding(
@@ -76,13 +177,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   trailing: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.restore_from_trash,
-                        color: Colors.red,
-                      )),
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.restore_from_trash,
+                      color: Colors.red,
+                    ),
+                  ),
                   leading: Checkbox(value: false, onChanged: (value) {}),
-                ),
+                )
               ],
             ),
           ),
