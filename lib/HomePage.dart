@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/widget/mydrawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -74,37 +75,7 @@ class _HomePageState extends State<HomePage> {
           ),
           centerTitle: true,
         ),
-        drawer: Drawer(
-          backgroundColor: Color.fromARGB(255, 139, 182, 202),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 40,
-                  child: Icon(Icons.person),
-                ),
-                ListTile(
-                  onTap: () {
-                    //  Navigator.pushReplacement(
-                    //  context,
-                    // MaterialPageRoute(builder: (context) => const ContactPage()),
-                  },
-                  title: const Text(
-                    'Settings',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  trailing: const Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        drawer: MyDrawer(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Color.fromARGB(255, 139, 182, 202),
           hoverColor: Colors.white,
@@ -118,7 +89,9 @@ class _HomePageState extends State<HomePage> {
                       title: Text(
                         "Write your plans?",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white,fontSize: 20),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                       content: TextField(
@@ -136,7 +109,8 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Text(
                               "Add",
-                              style: TextStyle(color: Colors.white,fontSize: 15),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
                           ),
                         ),
@@ -148,7 +122,8 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Text(
                               "cancel",
-                              style: TextStyle(color: Colors.white,fontSize: 15),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
                           ),
                         ),
@@ -174,21 +149,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              
               Expanded(
-                child: ListView.builder(itemCount: 4, itemBuilder: (context, index) {
-                  return  ListTile(
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.restore_from_trash,
-                        color: Colors.red,
+                child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.restore_from_trash,
+                          color: Colors.red,
+                        ),
                       ),
-                    ),
-                    leading: Checkbox(value: false, onChanged: (value) {}),
-                  );
-                },
-                 
+                      leading: Checkbox(value: false, onChanged: (value) {}),
+                    );
+                  },
                 ),
               )
             ],
