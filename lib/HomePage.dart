@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/models/Taskmodel.dart';
 import 'package:todo/widget/mydrawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,6 +13,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Task> tasksList = [];
+  final _todoController = TextEditingController();
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<void> saveData() async {
+    List<Map<String, dynamic>> tasksAsJson = [];
+    List<String> tasksAsString = [];
+
+    for (var element in tasksList) {
+      tasksAsJson.add(element.toJosn());
+    }
+
+    for (var element in tasksAsJson) {
+      tasksAsString.add(jsonEncode(element));
+    }
+    final prefs = await SharedPreferences.getInstance();
+    bool res = await prefs.setStringList("tasks", tasksAsString);
+    print("save data======== $res ");
+  }
+
+  Future<void> getData() async {
+    List<String> tasksAsString = [];
+    List<Map<String, dynamic>> tasksAsJson = [];
+
+    tasksList.clear();
+    final prefs = await SharedPreferences.getInstance();
+
+    tasksAsString = prefs.getStringList("tasks") ?? [];
+
+    for (var element in tasksAsString) {
+      tasksAsJson.add(jsonDecode(element));
+    }
+
+    setState(() {
+      for (var element in tasksAsJson) {
+        tasksList.add(Task.fromJson(element));
+      }
+    });
+
+    print(tasksList[0].title);
+  }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController additem = TextEditingController();
@@ -95,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                         textAlign: TextAlign.center,
                       ),
                       content: TextField(
-                        controller: additem,
+                        controller: _todoController,
                         maxLength: 50,
                         decoration:
                             InputDecoration(border: OutlineInputBorder()),
@@ -105,7 +156,8 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(right: 50),
                           child: TextButton(
                             onPressed: () {
-                              Navigator.pop(context, true);
+                              _addToDoItem(_todoController.text);
+                              Navigator.pop(context, false);
                             },
                             child: Text(
                               "Add",
@@ -151,17 +203,32 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 4,
+                  itemCount: tasksList.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      title: Text(
+                        tasksList[index].title,
+                        style: TextStyle(
+                          decoration: tasksList[index].isDone
+                              ? TextDecoration.lineThrough
+                              : null,
+                        ),
+                      ),
                       trailing: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _deleteToDoItem(tasksList[index].id);
+                        },
                         icon: Icon(
-                          Icons.restore_from_trash,
+                          Icons.restore_from_trash_sharp,
                           color: Colors.red,
                         ),
                       ),
-                      leading: Checkbox(value: false, onChanged: (value) {}),
+                      leading: Checkbox(
+                        value: tasksList[index].isDone,
+                        onChanged: (value) {
+                          _handleToDoChange(tasksList[index]);
+                        },
+                      ),
                     );
                   },
                 ),
@@ -169,5 +236,31 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ));
+  }
+
+  void _addToDoItem(String toDo) {
+    setState(() {
+      var newTask = Task(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        title: toDo,
+      );
+      tasksList.add(newTask);
+      saveData();
+    });
+    _todoController.clear();
+  }
+
+  void _deleteToDoItem(String id) {
+    setState(() {
+      tasksList.removeWhere((item) => item.id == id);
+    });
+    saveData();
+  }
+
+  void _handleToDoChange(Task todo) {
+    setState(() {
+      todo.isDone = !todo.isDone;
+    });
+    saveData();
   }
 }
