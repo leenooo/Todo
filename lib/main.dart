@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: AnimatedSplashScreen(
-            splashIconSize: 350,
+            splashIconSize: 250,
             splash: Image.asset("assets/images/P.PNG"),
             nextScreen: HomePage()));
   }
