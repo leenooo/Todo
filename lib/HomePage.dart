@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Color.fromARGB(255, 139, 182, 202),
           title: Text(
             "All ToDos",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontFamily: "Gameplay"),
           ),
           centerTitle: true,
         ),
@@ -224,6 +224,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       leading: Checkbox(
+                        fillColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 231, 239, 243)),
+                        checkColor: Color.fromARGB(255, 139, 182, 202),
                         value: tasksList[index].isDone,
                         onChanged: (value) {
                           _handleToDoChange(tasksList[index]);
