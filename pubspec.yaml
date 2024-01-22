@@ -79,15 +79,16 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Gameplay
+    - family: ultra-regular-Pandaify
       fonts:
-        - asset: assets/fonts/Gameplay.ttf
+        - asset: assets/fonts/ultra-regular-Pandaify
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+
+    - family: dm-serif-text-Pandaify
+      fonts:
+        - asset: assets/fonts/dm-serif-text-Pandaify
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

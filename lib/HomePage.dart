@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
                           title: Text(
                             "Are you sure?",
                             style: TextStyle(
+                                fontFamily: "dm-serif-text-Pandaify",
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                             textAlign: TextAlign.center,
@@ -91,6 +92,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   "Yes",
                                   style: TextStyle(
+                                      fontFamily: "dm-serif-text-Pandaify",
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),
@@ -105,6 +107,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   "No",
                                   style: TextStyle(
+                                      fontFamily: "dm-serif-text-Pandaify",
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),
@@ -122,7 +125,13 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Color.fromARGB(255, 139, 182, 202),
           title: Text(
             "All ToDos",
-            style: TextStyle(color: Colors.white, fontFamily: "Gameplay"),
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: "ultra-regular-Pandaify",
+                shadows: [
+                  Shadow(
+                      color: Colors.black, offset: Offset(3, 2), blurRadius: 5)
+                ]),
           ),
           centerTitle: true,
         ),
@@ -140,6 +149,7 @@ class _HomePageState extends State<HomePage> {
                       title: Text(
                         "Write your plans?",
                         style: TextStyle(
+                            fontFamily: "dm-serif-text-Pandaify",
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             fontSize: 20),
@@ -161,8 +171,10 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Text(
                               "Add",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontFamily: "dm-serif-text-Pandaify"),
                             ),
                           ),
                         ),
@@ -174,8 +186,10 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Text(
                               "cancel",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontFamily: "dm-serif-text-Pandaify"),
                             ),
                           ),
                         ),
@@ -196,46 +210,59 @@ class _HomePageState extends State<HomePage> {
                   Center(
                     child: Text(
                       "My Tasks ",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "dm-serif-text-Pandaify"),
                     ),
                   ),
                 ],
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: tasksList.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        tasksList[index].title,
-                        style: TextStyle(
-                          decoration: tasksList[index].isDone
-                              ? TextDecoration.lineThrough
-                              : null,
+              tasksList.isEmpty
+                  ? SizedBox(
+                      height: 300,
+                      child: Center(
+                        child: Text(
+                          "Add your tasks",
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          _deleteToDoItem(tasksList[index].id);
+                    )
+                  : Expanded(
+                      child: ListView.builder(
+                        itemCount: tasksList.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(
+                              tasksList[index].title,
+                              style: TextStyle(
+                                fontFamily: "dm-serif-text-Pandaify",
+                                decoration: tasksList[index].isDone
+                                    ? TextDecoration.lineThrough
+                                    : null,
+                              ),
+                            ),
+                            trailing: IconButton(
+                              onPressed: () {
+                                _deleteToDoItem(tasksList[index].id);
+                              },
+                              icon: Icon(
+                                Icons.restore_from_trash_sharp,
+                                color: Colors.red,
+                              ),
+                            ),
+                            leading: Checkbox(
+                              fillColor: MaterialStatePropertyAll(
+                                  Color.fromARGB(255, 231, 239, 243)),
+                              checkColor: Color.fromARGB(255, 139, 182, 202),
+                              value: tasksList[index].isDone,
+                              onChanged: (value) {
+                                _handleToDoChange(tasksList[index]);
+                              },
+                            ),
+                          );
                         },
-                        icon: Icon(
-                          Icons.restore_from_trash_sharp,
-                          color: Colors.red,
-                        ),
                       ),
-                      leading: Checkbox(
-                        fillColor: MaterialStatePropertyAll(
-                            Color.fromARGB(255, 231, 239, 243)),
-                        checkColor: Color.fromARGB(255, 139, 182, 202),
-                        value: tasksList[index].isDone,
-                        onChanged: (value) {
-                          _handleToDoChange(tasksList[index]);
-                        },
-                      ),
-                    );
-                  },
-                ),
-              )
+                    )
             ],
           ),
         ));
